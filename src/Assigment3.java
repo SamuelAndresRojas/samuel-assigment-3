@@ -15,6 +15,10 @@ public class Assigment3 {
 		Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Welcome");
+		System.out.println("Enter your Email:");
+		String emailInput = scanner.nextLine();
+		System.out.println("Enter your Password:");
+		String passwordInput = scanner.nextLine();
 
 		fileReader = new BufferedReader(new FileReader("data.txt"));
 
@@ -22,10 +26,6 @@ public class Assigment3 {
 		int tries = 0;
 		while (tries < 2) {
 			while ((txt = fileReader.readLine()) != null) {
-				System.out.println("Enter your Email:");
-				String emailInput = scanner.nextLine();
-				System.out.println("Enter your Password:");
-				String passwordInput = scanner.nextLine();
 				String[] values = txt.split(",");
 				User user = userService.createUser(values[0], values[1], values[2]);
 
@@ -34,8 +34,7 @@ public class Assigment3 {
 
 				if (emailInput.equalsIgnoreCase(values[0]) && passwordInput.equals(values[1])) {
 					System.out.println("Welcome: " + values[2]);
-					tries++;
-				} else if (emailInput != (values[0]) && passwordInput != (values[1])) {
+				} else {
 					System.out.println("Invalid login, please try again");
 					tries++;
 
