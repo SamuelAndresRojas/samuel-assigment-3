@@ -5,6 +5,12 @@ public class User {
 	private String password;
 	private String name;
 	
+	public User(String[] input) {
+		this.username = input[0];
+		this.password = input[1];
+		this.name = input[2];
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -29,7 +35,6 @@ public class User {
 		this.name = name;
 	}
 
-	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", name=" + name + "]";
 	}

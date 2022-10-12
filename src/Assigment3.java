@@ -1,53 +1,49 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Assigment3 {
+	public User[] users = new User[4];
+	private UserService userService = new UserService();
 
-	@SuppressWarnings("null")
-	public static void main(String[] args) throws IOException {
+	DataToArray userArrayService = new DataToArray();
 
-		User[] users = new User[4];
-		UserService userService = new UserService();
-		BufferedReader fileReader = null;
-		String txt;
-		Scanner scanner = new Scanner(System.in);
+	public void doWork() throws IOException {
 
-		System.out.println("Welcome");
+		Scanner scanner = null;
+		try {
+			scanner = new Scanner(System.in);
 
-		fileReader = new BufferedReader(new FileReader("data.txt"));
+			boolean validLogin = false;
+			int loginAttempts = 0;
+			while (!validLogin && loginAttempts < 5) {
+				System.out.println("Enter your email: ");
+				String username = scanner.nextLine();
+				System.out.println("Enter your password: ");
+				String password = scanner.nextLine();
 
-			while ((txt = fileReader.readLine()) != null) {
-				
-			}
-			
-			int i = 0;
-			int tries = 0;
-			while (tries < 2) {
-				
-				String[] values = txt.split(",");
-				User user = userService.createUser(values[0], values[1], values[2]);
-				users[i] = user;
-				i++;
-				System.out.println("Enter your Email:");
-				String emailInput = scanner.nextLine();
-				System.out.println("Enter your Password:");
-				String passwordInput = scanner.nextLine();
-						
-				if (emailInput.equalsIgnoreCase(values[0]) && passwordInput.equals(values[1])) {
-					System.out.println("Welcome: " + values[2]);
+				User validUser = userService.validateUser(username, password);
+				if (validUser != null) {
+					System.out.println("Welcome: " + validUser.getName());
+					validLogin = true;
 				} else {
 					System.out.println("Invalid login, please try again");
-					tries++;
-
+					loginAttempts++;
+					if (loginAttempts == 5) {
+						System.out.println("Too many failed login attempts, you are now locked out.");
+					}
 				}
 			}
-			if (tries == 2) {
-				System.out.println("Too many failed login attempts, you are now locked out.");
-			}
-
+		} finally {
+			if (scanner != null)
+				scanner.close();
 		}
 
 	}
+
+	public static void main(String[] args) throws IOException {
+		Assigment3 userValidation = new Assigment3();
+		userValidation.doWork();
+
+	}
+
+}
