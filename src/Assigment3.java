@@ -7,11 +7,9 @@ public class Assigment3 {
 
 	DataToArray userArrayService = new DataToArray();
 
-	public void doWork() throws IOException {
+	public void userVerification() throws IOException {
 
-		Scanner scanner = null;
-		try {
-			scanner = new Scanner(System.in);
+			Scanner scanner = new Scanner(System.in);
 
 			boolean validLogin = false;
 			int loginAttempts = 0;
@@ -33,16 +31,15 @@ public class Assigment3 {
 					}
 				}
 			}
-		} finally {
-			if (scanner != null)
-				scanner.close();
-		}
+				
+			scanner.close();
 
 	}
 
 	public static void main(String[] args) throws IOException {
+		System.out.println("Welcome to User Validation");
 		Assigment3 userValidation = new Assigment3();
-		userValidation.doWork();
+		userValidation.userVerification();
 
 	}
 
