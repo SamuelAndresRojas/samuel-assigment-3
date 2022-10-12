@@ -10,18 +10,18 @@ public class DataToArray {
 			
 			User[] users = new User[4];
 
-			BufferedReader bufferedReader = null;
+			BufferedReader dataReader = null;
 			try {
-				bufferedReader = new BufferedReader(new FileReader("data.txt"));
+				dataReader = new BufferedReader(new FileReader("data.txt"));
 				String info;
 				int i = 0;
-				while ((info = bufferedReader.readLine()) != null) {
+				while ((info = dataReader.readLine()) != null) {
 					users[i] = new User(info.split(","));
 					i = i + 1;
 				}
 			} finally {
-				if (bufferedReader != null) 
-					bufferedReader.close();
+				if (dataReader != null) 
+					dataReader.close();
 			}
 			return users;
 		}
